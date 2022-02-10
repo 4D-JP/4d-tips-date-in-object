@@ -31,3 +31,10 @@ $o:=JSON Parse("{\"date\":\"2022-02-10\"}")
 	"success": true
 }
 ```
+
+プロジェクトモード（またはv17以降に作成したストラクチャファイル）では，新しい仕様が適用されるため，前述したようなコードでは日付風の文字列が日付に変換されます。
+
+<img width="740" alt="json" src="https://user-images.githubusercontent.com/10509075/153351894-2a74fcd3-032b-41c4-8764-98dcfd68720e.png">
+
+この点は[`JSON Parse`](https://doc.4d.com/4Dv19/4D/19.1/JSON-Parse.301-5653601.ja.html)のドキュメントに記述されています。
+
