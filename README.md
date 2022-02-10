@@ -122,3 +122,18 @@ $JSON:=cs.JSON.new()
 $o:=$JSON.parse("{\"code\":\"9999-88-66\"}"; String type without time zone)
 ```
 
+このクラスをコンポーネントにするには，インスタンスを返す共有メソッドを用意します。
+
+```4d
+#DECLARE()->$JSON : cs.JSON
+
+$JSON:=cs.JSON.new()
+```
+
+呼び出しは下記のようになります。
+
+```4d
+$JSON:=JSON 
+
+$o:=$JSON.parse("{\"code\":\"9999-88-66\"}"; String type without time zone)
+```
