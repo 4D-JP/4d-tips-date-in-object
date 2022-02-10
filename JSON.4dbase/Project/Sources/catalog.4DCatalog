@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE base SYSTEM "http://www.4d.com/dtd/2007/base.dtd" >
+<base name="JSON" uuid="90A382EAD5492C4D813D7EDDFCA60D9A" collation_locale="ja">
+	<schema name="DEFAULT_SCHEMA"/>
+	<base_extra __stringCompHash="icu:68.1.0, alternate=search" __keywordBuildingHash="mecab:0.996;sys.dic:102;" data_file_path=":data.4DD" package_name="JSON" structure_file_name="JSON">
+		<journal_file journal_file_enabled="true"/>
+	</base_extra>
+</base>

@@ -1,0 +1,25 @@
+{
+	"methods": {
+		"parse": {
+			"timeStamp": "2022-02-10T08:02:03.761Z",
+			"attributes": {
+				"invisible": true,
+				"preemptive": "incapable"
+			}
+		},
+		"TEST": {
+			"timeStamp": "2022-02-10T08:08:43.847Z",
+			"attributes": {
+				"preemptive": "capable"
+			}
+		},
+		"JSON": {
+			"timeStamp": "2022-02-10T08:07:06.617Z",
+			"attributes": {
+				"invisible": true,
+				"shared": true,
+				"preemptive": "capable"
+			}
+		}
+	}
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><preferences stamp="5">
+	<com.4d>
+		<deployment>
+			<options/>
+		</deployment>
+		<database>
+			<misc standard_xpath="false"/>
+		</database>
+		<server>
+			<network>
+				<client_server use_encryption="false"/>
+				<options use_legacy_network_layer="false"/>
+			</network>
+		</server>
+		<web>
+			<standalone_server>
+				<configuration session_mode="3" automatic_session_management="true"/>
+			</standalone_server>
+			<remote>
+				<configuration session_mode="3" automatic_session_management="true"/>
+			</remote>
+		</web>
+	</com.4d>
+</preferences>

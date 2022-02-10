@@ -1,0 +1,9 @@
+{
+	"messages": [
+		{
+			"message": "Compatibility setting 'Use date type instead of ISO date format in objects' switched on.",
+			"severity": "warning"
+		}
+	],
+	"success": true
+}
