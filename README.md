@@ -62,7 +62,7 @@ Function parse($json : Text; $datesInsideObjects : Integer; $timesInsideObjects 
 		$params.timesInsideObjects:=$timesInsideObjects
 	End if 
 	
-	CALL WORKER("JSON"; "parse"; $params; $signal)
+	CALL WORKER("JSON"; "parse"; $json; $params; $signal)
 	
 	$signal.wait()
 	
@@ -72,7 +72,47 @@ Function parse($json : Text; $datesInsideObjects : Integer; $timesInsideObjects 
 呼び出されるプロジェクトメソッドは「プリエンプティブモードでは実行不可」なので，スレッドアンセーフなコマンドを実行することができます。
 
 ```4d
+#DECLARE($json : Text; $params : Object; $signal : 4D.Signal)
 
+If ($params.datesInsideObjects#Null)
+	SET DATABASE PARAMETER(Dates inside objects; $params.datesInsideObjects)
+End if 
+
+If ($params.timesInsideObjects#Null)
+	SET DATABASE PARAMETER(Times inside objects; $params.timesInsideObjects)
+End if 
+
+var $value : Variant
+
+$value:=JSON Parse($json)
+
+
+If (Not(Process aborted))
+	
+	Use ($signal)
+		
+		Case of 
+			: (Value type($value)=Is object)
+				
+				$signal.value:=OB Copy($value; ck shared; $signal)
+				
+			: (Value type($value)=Is collection)
+				
+				$signal.value:=$value.copy(ck shared; $signal)
+				
+			Else 
+				
+				$signal.value:=$value
+				
+		End case 
+		
+		$signal.trigger()
+		
+	End use 
+	
+End if 
+
+KILL WORKER
 ```
 
 
