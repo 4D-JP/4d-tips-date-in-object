@@ -1,3 +1,6 @@
+![version](https://img.shields.io/badge/version-19%2B-5682DF)
+[![license](https://img.shields.io/github/license/4D-JP/4d-tips-date-in-object)](LICENSE)
+
 # JSONコマンドと日付型の扱いについての考察
 
 v16以前に作成されたアプリケーションは，デフォルトの設定でオブジェクト（エンティティを除く）の**日付型プロパティ**がサポートされておらず，日付型をプロパティに代入すると文字列が書き込まれ，プロパティを日付型に代入するとISOフォーマットの日付文字列として値が解釈されます。これは，[データベースパラメーター](https://doc.4d.com/4Dv19/4D/19.1/SET-DATABASE-PARAMETER.301-5653585.ja.html)`85` (Dates inside objects) が`1` (String type with time zone) にセットされた状態，あるいは[互換性のデータベース設定](https://doc.4d.com/4Dv19/4D/19/Compatibility-page.300-5416914.ja.html)「オブジェクトではISO日付フォーマットの代わりに日付型を使用する」が**無効**に設定された状態に相当します。通常，互換性の設定が無効にされていることは「旧式の仕様を踏襲する（下方互換性）」を意味します。
