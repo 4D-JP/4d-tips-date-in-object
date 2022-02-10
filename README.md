@@ -41,3 +41,62 @@ $o:=JSON Parse("{\"date\":\"2022-02-10\"}")
 <img width="741" alt="code" src="https://user-images.githubusercontent.com/10509075/153352870-d2996b77-52ce-494f-b7e3-d6cb77856791.png">
 
 プロジェクトモードであっても，データベースパラメーター`85` (Dates inside objects) は`SET DATABASE PARAMETER`で変更することができます。設定のスコープは「カレントプロセス」です。しかしながら，`SET DATABASE PARAMETER`はスレッドアンセーフコマンドなので，スコープのセレクターがインタープロセスであるかどうかに関わりなく，プリエンプティブプロセスでは呼び出すことができません。
+
+#### 参考：プリエンプティブプロセスからスレッドアンセーフコマンドをワーカー経由でコール
+
+前述したように，`SET DATABASE PARAMETER`はスレッドアンセーフコマンドですが，スコープがインタープロセスであれば，`Signal`を使用し，コオペレアティブモードのワーカーにコマンドを代行させることができます。
+
+簡単なクラスを作成します。
+
+```4d
+Function get($selector : Integer)->$value : Variant
+	
+	$signal:=New signal
+	
+	CALL WORKER("param"; "get_param"; $selector; $signal)
+	
+	$signal.wait()
+	
+	$value:=$signal.value
+	
+Function set($selector : Integer; $value : Variant)
+	
+	$signal:=New signal
+	
+	CALL WORKER("param"; "set_param"; $selector; $value; $signal)
+	
+	$signal.wait()
+```
+
+呼び出されるプロジェクトメソッドは「プリエンプティブモードでは実行不可」なので，スレッドアンセーフなコマンドを実行することができます。
+
+```4d
+#DECLARE($selector : Integer; $value : Variant; $signal : 4D.Signal)
+
+Case of 
+	: (Count parameters=3)
+		
+		SET DATABASE PARAMETER($selector; $value)
+		
+		If (Not(Process aborted))
+			
+			Use ($signal)
+				
+				$signal.trigger()
+				
+			End use 
+			
+		End if 
+		
+End case 
+
+KILL WORKER
+```
+
+
+```4d
+$param:=cs.Param.new()
+$value:=$param.get(Use legacy Network Layer)
+```
+
+プリエンプティモードでもデータベースパラメーターの読み書きができます。しかし，ワーカー（別プロセス）を経由しているため，スコープが「カレントプロセス」のパラメーターには使用できません。
