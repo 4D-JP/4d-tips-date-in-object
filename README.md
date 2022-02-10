@@ -40,3 +40,4 @@ $o:=JSON Parse("{\"date\":\"2022-02-10\"}")
 
 <img width="741" alt="code" src="https://user-images.githubusercontent.com/10509075/153352870-d2996b77-52ce-494f-b7e3-d6cb77856791.png">
 
+プロジェクトモードであっても，データベースパラメーター`85` (Dates inside objects) は`SET DATABASE PARAMETER`で変更することができます。設定のスコープは「カレントプロセス」です。しかしながら，`SET DATABASE PARAMETER`はスレッドアンセーフコマンドなので，スコープのセレクターがインタープロセスであるかどうかに関わりなく，プリエンプティブプロセスでは呼び出すことができません。
