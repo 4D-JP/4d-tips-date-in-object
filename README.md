@@ -114,5 +114,11 @@ End if
 KILL WORKER
 ```
 
+カスタム版の`JSON.parse()`は，下記の要領で使用することができます。
 
+```4d
+$JSON:=cs.JSON.new()
+
+$o:=$JSON.parse("{\"code\":\"9999-88-66\"}"; String type without time zone)
+```
 
