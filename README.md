@@ -58,7 +58,7 @@ Function parse($json : Text; $datesInsideObjects : Integer; $timesInsideObjects 
 		$params.datesInsideObjects:=$datesInsideObjects
 	End if 
 	
-	If (Count parameters>1)
+	If (Count parameters>2)
 		$params.timesInsideObjects:=$timesInsideObjects
 	End if 
 	
