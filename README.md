@@ -86,7 +86,6 @@ var $value : Variant
 
 $value:=JSON Parse($json)
 
-
 If (Not(Process aborted))
 	
 	Use ($signal)
